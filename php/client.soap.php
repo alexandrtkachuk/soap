@@ -1,14 +1,14 @@
 <?php
 
-$iId=0;
+$iId=1;
 if(isset($_POST['id']))
 {
     $iId = $_POST['id'];
 }
 
-if(!is_numeric($iId) || $iId<0)
+if(!is_numeric($iId) || $iId<1)
 {
-    $iId=0;
+    $iId=1;
 }
 
 
@@ -17,7 +17,7 @@ if(!is_numeric($iId) || $iId<0)
 <div>
     <form method="POST">
         <label>id macth:</label>
-        <input type="number" min="0" name="id" value="<?php print $iId; ?>" >
+        <input type="number" min="1" name="id" value="<?php print $iId; ?>" >
         <input type="submit">
         
     </form>
@@ -32,15 +32,15 @@ $client = new   SoapClient(
 $array = array(
         "iGameId" => $iId
         );
-#$res = $client->GameInfo($array);
+$res = $client->GameInfo($array);
 
 print '<pre>'; 
-    print_r($client->AllStadiumInfo());
+    #print_r($client->__getFunctions() );
     #print_r( $client->CountryNames());
     #print_r( $client->GameInfo($array));
     #print_r($res->GameInfoResult);
 print '</pre>';
-/*
+
 
 $res = $res->GameInfoResult;
 print '<table>
@@ -67,4 +67,4 @@ print '<table>
 
     </table>';
 
-*/
+

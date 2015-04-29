@@ -19,17 +19,19 @@ my $res;
 
 my $client= SOAP::Lite
 -> service('http://footballpool.dataaccess.eu/data/info.wso?WSDL');
-$client->proxy('http://footballpool.dataaccess.eu/data/info.wso' );
+#$client->proxy('http://footballpool.dataaccess.eu/data/info.wso' );
 
 my @args = 
 (
     {iGameId=>1}
 );
 
-$client->outputxml('true');
-
+#$client->outputxml('true');
+$client->readable(1);
 my $som = $client->GameInfo(1);
+#my $som =  SOAP::SOM->new($res);
 
+#print   $som->GameInfoResult;
 #my $result = $soap->c2f(37.5);
 #unless ($result->fault) {
 #    print $result->result();
