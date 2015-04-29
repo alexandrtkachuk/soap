@@ -16,10 +16,10 @@
 </message> 
 
 <message name='testRequest'> 
- <part name='symbol' type='xsd:string'/> 
+ <part name='teststring2' type='xsd:string'/> 
 </message> 
 <message name='testResponse'> 
- <part name='Result' type='xsd:float'/> 
+ <part name='Result' type='xsd:string'/> 
 </message> 
 
 
@@ -36,9 +36,6 @@
 
 
 </portType> 
-
-
-
 
 
 <binding name='StockQuoteBinding' type='tns:StockQuotePortType'> 
@@ -72,7 +69,7 @@
 
 <service name='StockQuoteService'> 
  <port name='StockQuotePort' binding='StockQuoteBinding'> 
-     <soap:address location='http://192.168.0.15/~user7/soap/shop/server/php/index.php'/> 
+     <soap:address location='http://192.168.56.88/soap/shop/server/php/index.php'/> 
  </port> 
 </service> 
 </definitions> 
