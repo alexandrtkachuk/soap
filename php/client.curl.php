@@ -1,27 +1,45 @@
 <?php
 
 
+    include('config.php');
+    include(LIB.'/function.php');
 
-$ch = curl_init('http://footballpool.dataaccess.eu/data/info.wso/GameInfo/?iGameId=1');
-curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 "); 
-# User-Agent
-$headers = array
-    (
-        'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*;q=0.8',
-        'Accept-Language: ru,en-us;q=0.7,en;q=0.3',
-        'Accept-Encoding: deflate',
-        'Accept-Charset: windows-1251,utf-8;q=0.7,*;q=0.7'
-    ); 
-curl_setopt($ch, CURLOPT_HTTPHEADER,$headers); 
 
-# добавляем заголовков к нашему запросу. Чтоб смахивало на настоящих
-#curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookies);  
-#curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookies);
 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-# Убираем вывод данных в браузер. Пусть функция их возвращает а не выводит
+    $temp_err=array(); // array errors
+    $content=array(); //
 
-$result= curl_exec($ch); // выполняем запрос curl - обращаемся к сервера php.su
-curl_close($ch);
+    try{
+        $iId=1;
+        if(isset($_POST['id']))
+        {
+            $iId = $_POST['id'];
+        }
 
-print $result;
+        if(!is_numeric($iId) || $iId<1  || $iId>64)
+        {
+            $iId=1;
+        }
+
+        $content['id'] = $iId;
+        $soap = new CurlSoap();
+        $content['str']=$soap->getParam($iId);
+        $content['all']=$soap->noParams();
+
+    }
+    catch(Exception $e ){
+
+
+        $temp_err[]= $e->getMessage();
+
+
+    }
+
+        
+    loadTemplate('view',$content,$temp_err );
+
+
+?>
+
+
+
