@@ -8,4 +8,5 @@ soap
 аякс общаеться с клиентом а он с сервером  
 у клиента нет конекта к ДБ
 нет никкой админки 
+element name="Type" nillable="true" type="ns:Type"
 <xsd:element name="Type" nillable="true" type="ns:Type"/>
