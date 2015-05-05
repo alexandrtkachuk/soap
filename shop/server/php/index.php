@@ -11,10 +11,10 @@ function test($test)
 }  
 
 
-function getCategories()
+function getCategories($temp )
 {
-    return 'good call getCategories';
-    return $xmlString;
+    return 'good call getCategoriesi!';
+    #return $xmlString;
 }
 
 
@@ -36,13 +36,19 @@ function addOrder($xmlString)
     return true;
 }
 
+function sendSms($MessegeList)
+{
+    $test = array('status'=>false);
+    return $test;
+}
 
 
 ini_set("soap.wsdl_cache_enabled", "0"); // отключаем кэширование WSDL 
 
 
-$server = new SoapServer(SOAP_WSDL);    
-$server->addFunction("getCategories");
+#$server = new SoapServer(SOAP_WSDL);    
+$server = new SoapServer('http://192.168.56.88/soap/shop/client/php/me.xml');
+$server->addFunction("sendSms");
 $server->addFunction("getGoods");
 $server->addFunction("getGoods2Categories");
 $server->addFunction("addOrder");

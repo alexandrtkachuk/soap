@@ -14,19 +14,28 @@ $content=array(); //
 try{
 
 
-    $client = new SoapClient(SOAP_WSDL);  
+    #$client = new SoapClient(SOAP_WSDL); 
+    
+    $client = new SoapClient('http://192.168.56.88/soap/shop/client/php/me.xml',
+   array( 'soap_version' => SOAP_1_2) 
+    );  
+    
     print '<pre>';
         print_r($client->__getFunctions() );
     print '</pre>';
-    print($client->getCategories()).'<br/>';  
-    print($client->getGoods(4,5)).'<br/>';
-    print($client->getGoods2Categories(3)).'<br/>';
-    print($client->addOrder('test')).'<br/>';
+    
+        
+    var_dump($client->sendSms( 
+            array( 'test'=>2)
+        //$myClass
+    ));  
+    #print($client->getGoods(4,5)).'<br/>';
+    #print($client->getGoods2Categories(3)).'<br/>';
+    #print($client->addOrder('test')).'<br/>';
 
 
 }
-catch(Exception $e ){
-
+catch(Exception $e ){ 
 
     $temp_err[]= $e->getMessage();
     
