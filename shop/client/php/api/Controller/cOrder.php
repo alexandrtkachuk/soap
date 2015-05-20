@@ -5,7 +5,7 @@ class cOrder extends cController
     public function  getPayments()
     {     
         #return  (new Order)->PaymentList();
-        $r = $this->client->Payments();
+        $r = $this->client->List();
         var_dump($r);
         print 'ttt'; 
     }

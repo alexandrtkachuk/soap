@@ -61,7 +61,7 @@ $server = new SoapServer(SOAP_WSDL);
 #$server = new SoapServer('http://192.168.56.88/soap/shop/client/php/me.xml');
 $server->addFunction("SearchCar");
 $server->addFunction("AllCars");
-$server->addFunction("CarInfo");
+#$server->addFunction("CarInfo");
 $server->addFunction("Payments");
 $server->handle();  
 

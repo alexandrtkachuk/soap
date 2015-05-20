@@ -19,7 +19,7 @@ class Route
 
         @ list( $this->class,$this->method,$param) = explode('/',$url,3);
         #@ list($this->params,$this->extension) =  explode('.', $param , 2);
-
+        #print 'url='.$url;
         $this->params= $param;
 
         #@ list($this->params,$this->extension)= 

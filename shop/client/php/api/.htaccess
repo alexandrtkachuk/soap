@@ -1,7 +1,7 @@
 RewriteEngine On
 Options +FollowSymlinks
-#RewriteBase  /~user7/rest/server/
-RewriteBase  /soap/shop/client/php/api/
+RewriteBase  /~user7/soap/shop/client/php/api/
+#RewriteBase  /soap/shop/client/php/api/
 DirectoryIndex index.php
  
 RewriteRule ^(.*)$ index.php [L]

@@ -6,7 +6,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
              xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-             name="SmsWsdl"
+             name="CarsShop"
              xmlns="http://schemas.xmlsoap.org/wsdl/">
     <types>
         <xs:schema elementFormDefault="qualified"
@@ -109,17 +109,19 @@
             <output message="tns:ArrayCars" />
         </operation>
 		 
-		
-		 
-		 <operation name="CarInfo">
+		<operation name="CarInfo">
             <input message="tns:CarID" />
             <output message="tns:CarRequest" />
         </operation>	 
 		 
-		  <operation name="Payments">
+		<operation name="Payments">
 		    <input message="tns:CarID" />
             <output message="tns:PaymentsResponse" />
-         </operation>
+        </operation>
+		 
+		<operation name="List">
+            <output message="tns:PaymentsResponse" />
+        </operation>
 		 
     </portType>
 
@@ -148,7 +150,14 @@
             </output>
         </operation>
 		
-		
+		<operation name="List">
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#List'/> 
+			
+			<output>
+               <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' 
+    encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+            </output>
+        </operation>
 		
 		<operation name="CarInfo">
             <soap:operation soapAction="" />
@@ -162,7 +171,6 @@
 		
 		<operation name="Payments">
             <soap:operation soapAction="" />
-			
             <output>
                 <soap:body use="literal" />
             </output>
