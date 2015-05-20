@@ -1,0 +1,28 @@
+<div class="modal fade" id="myModalPay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Выбирети систему оплаты </h4>
+      </div>
+      <div class="modal-body">
+        
+          
+          <div class="container"   > 
+
+
+          <form class="form"    >
+              <p><b>{{cO.result.info}} </b></p>
+              
+                <div class="radio"  ng-repeat="item in cO.cart.payment.result">
+                    <label>
+                      <input ng-model ="cO.payment" type="radio" name="optionsRadios" id="optionsRadios1" value="{{item.id}}" checked>
+                      <span ng-bind="item.name"></span>
+                    </label>
+                  </div>            
+  
+              <button ng-click="cO.byu()" class="btn btn-lg btn-primary btn-block" type="submit">Оформит заказ</button>
+          </form>
+          
+          </div>
+      </div>

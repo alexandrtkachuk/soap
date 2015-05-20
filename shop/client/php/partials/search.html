@@ -1,0 +1,36 @@
+<div> 
+
+    <div class="row"><div class="col-md-4">
+        <form>
+             <label>Год:</label>
+             <input ng-model="cS.year"  type="number"  min="1900" class="form-control"    placeholder="год" required autofocus>
+             
+             <label>Обем двигателя:</label>
+             <input ng-model="cS.value"  type="text"  pattern="\d+(\.\d{1})?" class="form-control"  placeholder="Обем двигателя"    autofocus>
+             
+              <label>Цвет:</label>
+             <input  type="text" ng-model="cS.color"  class="form-control"    placeholder="цвет"  autofocus>
+             
+              <label>Максимальная скорость:</label>
+             <input  type="text" ng-model="cS.speed"  pattern="^[ 0-9]+$" class="form-control"    placeholder="Максимальная скорость"  autofocus>
+             
+              <label>Цена:</label>
+             <input  type="text"  ng-model="cS.price" pattern="\d+(\.\d{2})?" class="form-control"    placeholder="цена"  autofocus>
+            <hr />
+             <p> <button ng-click="cS.search()" class="btn btn-lg btn-primary btn-block" type="submit">Поиск</button></p>
+        </form>
+    </div></div>
+    
+ 
+	<div class="row">
+		<div ng-repeat="item in cS.el.items" class="col-md-4">
+		<h3 ng-bind="item.title"></h3>
+			<p><img  style="width: 50%;" src="images/{{item.image}}" ></p>
+			<p>max speed:<span ng-bind="item.maxSpeed"></span>km/h</p>
+			<p>year:<span ng-bind="item.year"></span></p>
+			<p>обём двигателя:<span ng-bind="item.engineSize"></span></p>
+			<p>price:<span ng-bind="item.price"></span></p>
+			<p><button ng-click="cS.cart.buy(item.id)" type="button" class="btn btn-primary">Купить</button></p>
+		</div>
+	</div>
+</div>

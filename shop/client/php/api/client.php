@@ -14,26 +14,23 @@ $content=array(); //
 try{
 
 
-    #$client = new SoapClient(SOAP_WSDL); 
+    $client = new SoapClient(SOAP_WSDL); 
     
-    $client = new SoapClient('http://192.168.56.88/soap/shop/client/php/me.xml',
-   array( 'soap_version' => SOAP_1_2) 
-    );  
+      
     
     print '<pre>';
         print_r($client->__getFunctions() );
-    print '</pre>';
     
-        
-    var_dump($client->sendSms( 
-            array( 'test'=>2)
-        //$myClass
-    ));  
+
+   $r =  $client->AllCars(  );
+     print_r($r->Cars->Struct);   
+    #var_dump($client->AllCars(  ));  
+var_dump($client->SearchCar(  ));
     #print($client->getGoods(4,5)).'<br/>';
     #print($client->getGoods2Categories(3)).'<br/>';
     #print($client->addOrder('test')).'<br/>';
 
-
+print '</pre>';
 }
 catch(Exception $e ){ 
 

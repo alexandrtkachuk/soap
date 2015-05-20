@@ -1,0 +1,36 @@
+
+<div class="modal fade" id="myModalReg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Регистрация</h4>
+      </div>
+      <div class="modal-body">
+        
+          
+          <div class="container"   > 
+
+
+          <form class="form"    >
+              <p><b>{{cU.result.info}} </b></p>
+              
+              <input ng-model="cU.remail" type="email" id="inputEmail" class="form-control"  name="email"  placeholder="электронная почта" required autofocus>
+              <input ng-model="cU.rname"  type="text"  class="form-control"  placeholder="имя" required >
+             
+              <input ng-model="cU.rpass"  type="password" id="inputPassword" class="form-control" placeholder="пароль"     required>
+              <input ng-model="cU.rpass2"  type="password" id="inputPassword" class="form-control" placeholder="пароль еще раз"     required>
+              
+              <hr />
+              
+  
+              <button ng-click="cU.registration()" class="btn btn-lg btn-primary btn-block" type="submit">Зарегестрироваться</button>
+          </form>
+          
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>

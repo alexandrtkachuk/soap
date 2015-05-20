@@ -35,9 +35,6 @@
             </xs:complexType>
            
             
-            
-            
-            
             <xs:complexType name="MessageList">
                 <xs:sequence>
                     <xs:element name="message" type="Message" minOccurs="1" maxOccurs="unbounded" />
@@ -47,12 +44,14 @@
             <xs:element name="Request">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="Car" type="Car"  />
+                        <xs:element name="car" minOccurs="1" nillable="true" type="Car" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             
+             <xs:element name="car" type="Car" />
             
+            <!--xsd:element name="Type" nillable="true" type="ns:Car" /-->
             
             
             <xs:element name="Response">
@@ -68,8 +67,9 @@
 
     <!-- Сообщения процедуры sendSms -->
     <message name="sendSmsRequest">
-        <part name="Request" type="Car"  minOccurs="1"  />
+        <part name="Request" type="tns:Car"    />
     </message>
+    
     <message name="sendSmsResponse">
         <part name="Response" element="tns:Response" />
     </message>
