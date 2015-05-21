@@ -3,21 +3,20 @@ class cOrder extends cController
 {
 
     public function  getPayments()
-    {     
-        #return  (new Order)->PaymentList();
-        $r = $this->client->List();
-        var_dump($r);
-        print 'ttt'; 
+    {
+        $r = $this->client->Payments();
+        return $r->paymentsEl->Struct;     
     }
     
     public function getOrder($params)
     {
-        $r = explode('?idt=',$params);
-        $r['user']= $this->user->info();
-        $r['uid']= $r['user']['id'];
-       #return  (new Order)->addOrder($r['uid'],$r[0],$r[1]);
-    
-    }
-    
-
+         @list($idpay,$idItem ) = explode('?idt=',$params,2);
+         #$idpay= $_GET['idp'];
+         #$idItem = $_GET['idt'];
+        
+         return $this->client->Order(array(
+             'idPay'=>$idpay,
+             'idItem'=>$idItem
+         ));
+    } 
 }  

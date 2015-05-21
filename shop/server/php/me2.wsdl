@@ -28,19 +28,6 @@
                 </xs:sequence>
             </xs:complexType>
             
-			<xs:complexType name="Void">
-                <xs:sequence>
-                   
-                </xs:sequence>
-            </xs:complexType>
-			  
-			 <xs:complexType name="typeOrder">
-                <xs:sequence>
-                   <xs:element name="idPay" type="xs:int" minOccurs="1" maxOccurs="1" />
-				   <xs:element name="idItem" type="xs:int" minOccurs="1" maxOccurs="1" />
-                </xs:sequence>
-            </xs:complexType>
-			
 			<xs:complexType name="miniInfo">
                 <xs:sequence>
 				    <xs:element name="id" type="xs:int" minOccurs="0" maxOccurs="1" />
@@ -55,6 +42,14 @@
 					<xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
                 </xs:sequence>
             </xs:complexType>
+            
+            <xs:element name="Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="status" type="xs:boolean" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             
 			<xs:element name="ArrayCars">
                 <xs:complexType>
@@ -79,7 +74,6 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-			
         </xs:schema>
     </types>
 
@@ -89,7 +83,7 @@
     </message>
     
     <message name="SearchResponse">
-        <part name="Response" element="tns:ArrayCars" />
+        <part name="Response" element="tns:Response" />
     </message>
 	
    	<message name="ArrayCars">
@@ -97,58 +91,37 @@
     </message>
 	
 	<message name="PaymentsResponse">
-        <part name="paymentsresponse"  element="tns:RequestPayments"  />
+        <part name="ResponsePay"  type="xs:int"  />
 	</message>
 	
 	<message name="CarID">
         <part name="carid" type="xs:int"   />
     </message>
-  
-   <message name="SetAllCars">
-	  <part name="none"  type="tns:Void"  />
-   </message>
-   
-   <message name="SetPay">
-	  <part name="nonepay"  type="tns:Void"  />
-   </message>
-   
-   <message name="SetOrder">
-	  <part name="valOrder"  type="tns:typeOrder"  />
-   </message>
-   
-   <message name="getOrder">
-	  <part name="result"  type="xs:boolean"  />
-   </message>
-   
    
     <!-- Привязка процедуры к сообщениям -->
     <portType name="myFunctionsPortType">
-        
-		<operation name="SearchCar">
+        <operation name="SearchCar">
             <input message="tns:CarRequest" />
             <output message="tns:ArrayCars" />
         </operation>
 		
-		<operation name="CarInfo">
-            <input message="tns:CarID" />
-            <output message="tns:CarRequest" />
-        </operation>
-		
 		 <operation name="AllCars">
-		    <input message="tns:SetAllCars"  />
             <output message="tns:ArrayCars" />
         </operation>
 		 
+		<operation name="CarInfo">
+            <input message="tns:CarID" />
+            <output message="tns:CarRequest" />
+        </operation>	 
+		 
 		<operation name="Payments">
-			<input message="tns:SetPay"  />
+		    <input message="tns:CarID" />
             <output message="tns:PaymentsResponse" />
         </operation>
 		 
-		 <operation name="Order">
-			<input message="tns:SetOrder"  />
-            <output message="tns:getOrder" />
+		<operation name="List">
+            <output message="tns:PaymentsResponse" />
         </operation>
-		
 		 
     </portType>
 
@@ -169,6 +142,22 @@
             </output>
         </operation>
 		
+		<operation name="AllCars">
+            <soap:operation soapAction="" />
+            
+			<output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+		
+		<operation name="List">
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#List'/> 
+			
+			<output>
+               <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' 
+    encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+            </output>
+        </operation>
 		
 		<operation name="CarInfo">
             <soap:operation soapAction="" />
@@ -180,33 +169,8 @@
             </output>
         </operation>
 		
-		<operation name="AllCars">
-            <soap:operation soapAction="" />
-            <input>
-			  <soap:body use="literal" />
-            </input>
-			<output>
-                <soap:body use="literal" />
-            </output>
-        </operation>
-		
-		
 		<operation name="Payments">
             <soap:operation soapAction="" />
-		  <input>
-			  <soap:body use="literal" />
-            </input>
-            <output>
-                <soap:body use="literal" />
-            </output>
-        </operation>
-		
-		
-		<operation name="Order">
-            <soap:operation soapAction="" />
-		  <input>
-			  <soap:body use="literal" />
-            </input>
             <output>
                 <soap:body use="literal" />
             </output>

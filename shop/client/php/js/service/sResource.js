@@ -13,77 +13,7 @@ App.service('sResource', function($resource , myConfig, md5 ) {
         {
             'get': { method:'GET' }
         });
-    
-    this.getUser_old = $resource(myConfig.backend+'user/info/', null,
-        {
-    
-            'get': {
-                method:'GET'
-                ,headers: {
-                    "Authorization": "Basic " + btoa("test@mail.ru:"+md5.createHash('test'))
-                   
-                }
-            
-            } 
-            
-            
-        });
-    
-    
-    this.user =  $resource(myConfig.backend+'user/add/:name/:pass/:email',
-        {
-            email:'@email',
-            name:'@name',
-            pass:'@pass'
-        },
-        {
-            'add': { method:'POST' }
-        });
-    
-    
-    this.getUser = function(temp, callback)
-    {   
-        var t =$resource(myConfig.backend+'user/info/', null,
-        {
-            'getme': {
-                method:'GET'
-                ,headers: temp
-            }  
-        });
         
-        return t.getme()
-        .$promise.then(callback);  
-    }
-    
-    this.loginUser = function(temp, callback)
-    {   
-        var t =$resource(myConfig.backend+'user/login/', null,
-        {
-            'getme': {
-                method:'Post'
-                ,headers: temp
-            }  
-        });
-        
-        return t.getme()
-        .$promise.then(callback);  
-    }
-    
-    this.logoutUser = function(temp, callback)
-    {   
-        var t =$resource(myConfig.backend+'user/logout/', null,
-        {
-            'getme': {
-                method:'PUT'
-                ,headers: temp
-            }  
-        });
-        
-        return t.getme()
-        .$promise.then(callback);  
-    }
-    
-    
         this.payment = function(callback){
         
             var t = $resource(myConfig.backend+'order/payments/', null,
@@ -100,7 +30,8 @@ App.service('sResource', function($resource , myConfig, md5 ) {
     
     //oreder
     
-    this.oreder = function(idPayment, idItem, IdUser, callback)
+    
+    this.orederOld = function(idPayment, idItem, IdUser, callback)
     {
          var t = $resource(myConfig.backend+'order/order/:idp/:idu',
         {
@@ -108,33 +39,21 @@ App.service('sResource', function($resource , myConfig, md5 ) {
             idt:'@idt'
         },
             {
-                'add': {
-                    method:'POST',
-                    headers:{ "token" : window.localStorage.taicarshop}
-                }
+                'add': { method:'GET'  }
                 
             });
             
             t.add({idp:idPayment , idt:idItem}).$promise.then(callback);
     }
     
+    this.oreder =  $resource(myConfig.backend+'order/order/:idp/:idu/', {
+            idp:'@idp',
+            idt:'@idt'
+        });
+       
     
-    this.delete = function( idItem, callback)
-    {
-         var t = $resource(myConfig.backend+'car/car/:idI/',
-        {
-            idI:'@idI'
-        },
-            {
-                'del': {
-                    method:'DELETE',
-                    headers:{ "token" : window.localStorage.taicarshop}
-                }
-                
-            });
-            
-            t.del({idI:idItem }).$promise.then(callback);
-    }
+    
+    
     
     
     this.search =  $resource(myConfig.backend+

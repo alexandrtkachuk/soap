@@ -8,7 +8,7 @@ App.controller('cOrder',function(sResource, md5, fCart, fUser){
         console.log('item id='+ this.cart.id );
         console.log('payment id='+ this.payment);
         
-        sResource.oreder(this.cart.id, this.payment,fUser.id, function(todo){
+        sResource.oreder.get( {idp:this.payment , idt:this.cart.id} ).$promise.then( function(todo){
             console.log(todo);
             
             $('#myModalPay').modal('toggle');

@@ -5,7 +5,7 @@ class cController
     public function __construct()
     {
         $this->client = new SoapClient(SOAP_WSDL);
-        print_r($this->client->__getFunctions() );
+        #print_r($this->client->__getFunctions() );
     }
 
     public function __call($name,$params)
